@@ -16,7 +16,7 @@ df = pd.read_csv("dashboard/data/data_final_AnakSehat.csv")
 
 # menampilkan preview data
 st.subheader("Preview Dataset")
-st.write("jumlah data:", len(df))
+st.write("Jumlah data:", len(df))
 st.dataframe(df.head(10))
 
 st.divider()
@@ -57,7 +57,7 @@ df_filter = df[
     (df['kelompok_usia'].isin(pilih_usia))
 ]
 
-st.write("data setelah difilter:", len(df_filter), "baris")
+st.write("Data setelah difilter:", len(df_filter), "baris")
 
 st.divider()
 
@@ -68,7 +68,7 @@ st.subheader("Pertanyaan 1 - Stunting berdasarkan Usia dan Jenis Kelamin")
 st.write("Pada kelompok usia serta jenis kelamin manakah yang memiliki presentase stunting tertinggi ditemukan pada balita dalam rentang usia 0 sampai 24 bulan?")
 
 # pilihan chart
-tipe_chart = st.radio("mau liat chart apa?", ["Stacked Bar", "Grouped Bar"], horizontal=True)
+tipe_chart = st.radio("Mau lihat chart apa?", ["Stacked Bar", "Grouped Bar"], horizontal=True)
 
 # membuat crosstab 
 ct = pd.crosstab(
@@ -97,7 +97,7 @@ plt.xticks(rotation=30, ha='right')
 plt.tight_layout()
 st.pyplot(fig1)
 
-st.info("Insight: kelompok usia 19-24 bulan punya persentase stunting paling tinggi dibanding kelompok usia lainnya")
+st.info("Insight: Kelompok usia 19-24 bulan memiliki tingkat stunting tertinggi dibandingkan kelompok usia lainnya. Hal ini menunjukkan bahwa pada rentang usia tersebut, balita lebih rentan mengalami gangguan pertumbuhan sehingga memerlukan perhatian dan pemantauan gizi yang lebih baik.")
 
 st.divider()
 
@@ -108,13 +108,13 @@ st.subheader("Pertanyaan 2 - Karakteristik Balita per Kategori Stunting")
 st.write("Bagaimana distribusi dan karakteristik tinggi badan, berat badan, usia, serta jenis kelamin pada masing-masing kategori status stunting balita usia 0–24 bulan?")
 
 pilih_variabel = st.selectbox(
-    "pilih variabel yang ingin dilihat",
+    "Pilih variabel yang ingin dilihat",
     ["tinggi_cm", "berat_kg", "umur_bulan", "haz_zscore", "waz_zscore", "bmi", "growth_composite_index"]
 )
 
-pilih_chart2 = st.radio("pilih tipe chart", ["Box Plot", "Violin Plot", "Histogram"], horizontal=True)
+pilih_chart2 = st.radio("Pilih tipe chart", ["Box Plot", "Violin Plot", "Histogram"], horizontal=True)
 
-pisah_gender = st.checkbox("pisahkan per jenis kelamin?")
+pisah_gender = st.checkbox("Pisahkan per jenis kelamin?")
 
 fig2, ax2 = plt.subplots(figsize=(10, 5))
 
@@ -147,11 +147,11 @@ plt.tight_layout()
 st.pyplot(fig2)
 
 # tabel rata-rata
-st.write("rata-rata per kategori:")
+st.write("Rata-rata per kategori:")
 rata2 = df_filter.groupby('stunting')[['tinggi_cm', 'berat_kg', 'umur_bulan', 'haz_zscore', 'growth_composite_index']].mean().round(2)
 st.dataframe(rata2)
 
-st.info("Insight: balita severely stunted punya rata-rata tinggi badan paling rendah, jauh di bawah kategori normal")
+st.info("Insight: Balita dengan kategori severely stunted memiliki rata-rata tinggi badan paling rendah dibandingkan dengan kategori lainny dan terlihat jauh berada di bawah balita dengan pertumbuhan normal. Kondisi ini menunjukkan adanya gangguan pertumbuhan yang cukup serius pada balita tersebut.")
 
 st.divider()
 
@@ -161,9 +161,9 @@ st.divider()
 st.subheader("Pertanyaan 3 - Jumlah Kasus Stunting")
 st.write("Bagaimana distribusi jumlah kasus stunting pada setiap kelompok usia dan jenis kelamin balita usia 0–24 bulan dalam dataset AnakSehat AI?")
 
-tampilkan = st.radio("tampilkan berdasarkan", ["Kelompok Usia", "Jenis Kelamin"], horizontal=True)
+tampilkan = st.radio("Tampilkan berdasarkan", ["Kelompok Usia", "Jenis Kelamin"], horizontal=True)
 
-persen_atau_jumlah = st.checkbox("tampilkan dalam persen?")
+persen_atau_jumlah = st.checkbox("Tampilkan dalam persen?")
 
 if tampilkan == "Kelompok Usia":
     kolom_x = "kelompok_usia"
@@ -187,7 +187,7 @@ plt.xticks(rotation=15)
 plt.tight_layout()
 st.pyplot(fig3)
 
-st.info("Insight: jumlah kasus stunting paling banyak ada di kelompok usia 13-24 bulan dan distribusi antara laki-laki dan perempuan hampir sama")
+st.info("Insight: Jumlah kasus stunting paling banyak ditemukan pada kelompok usia 13-24 bulan. Selain itu, distribusi kasus antara balita laki-laki dan perempuan terlihat hampir seimbang, sehingga stuntin dapat terjadi pada kedua jenis kelamin dengan tingkat yang relatif sama.")
 
 st.divider()
 
@@ -242,7 +242,7 @@ ax4.legend(loc='upper left', fontsize=7, markerscale=2)
 plt.tight_layout()
 st.pyplot(fig4)
 
-st.info("Insight: balita severely stunted keliatan ngelompok di bagian kiri bawah grafik yang artinya tinggi dan berat badannya rendah sekaligus")
+st.info("Insight: Balita dengan kategori severely stunted membentuk kelompok pada bagian kiri bawah, yang menunjukkan bahwa balita tersebut memiliki tinggi badan dan berat badan yang sama-sama rendah dibandingkan kategori lainnya.")
 
 st.divider()
 
@@ -253,12 +253,12 @@ st.subheader("Pertanyaan 5 - Pola Pertumbuhan")
 st.write("Bagaimana perbedaan pola pertumbuhan tinggi badan dan berat badan antara balita normal, stunted, dan severely stunted usia 0–24 bulan berdasarkan dataset AnakSehat AI?")
 
 pilih_var5 = st.selectbox(
-    "variabel yang mau dilihat polanya",
+    "Variabel yang ingin dilihat polanya",
     ["tinggi_cm", "berat_kg", "haz_zscore", "waz_zscore", "growth_composite_index"]
 )
 
 pilih_status5 = st.multiselect(
-    "pilih kategori yang mau ditampilkan",
+    "Pilih kategori yang ingin ditampilkan",
     options=['Severely Stunted', 'Stunted', 'Normal', 'Tall'],
     default=['Severely Stunted', 'Stunted', 'Normal']
 )
@@ -308,7 +308,7 @@ ax5.grid(True, alpha=0.3)
 plt.tight_layout()
 st.pyplot(fig5)
 
-st.info("Insight: semakin tua umurnya, gap antara balita normal dan stunted makin keliatan jauh. ini nunjukkin kalo stunting itu numpuk seiring waktu dan susah dikejar kalau udah telat")
+st.info("Insight: Semakin bertambah usia balita, perbedaan antara anak dengan pertumbuhan normal dan anak yang terkena stunting terlihat semakin jelas. Hal ini menunjukkan bahwa stuntin terjadi sevara bertahap dari waktu ke waktu dan akan semakin sulit diperbaiki jika penanganannya terlambat.")
 
 st.divider()
 
@@ -336,13 +336,13 @@ st.write(f"total balita yang terkena stunting (stunted + severely stunted): **{j
 st.success("""
 **Kesimpulan dari analisis:**
 
-1. Stunting paling banyak terjadi di kelompok usia 13-24 bulan, ini berarti intervensi gizi harus dilakukan sedini mungkin sebelum usia 12 bulan
+1. Kasus stunting paling banyak ditemukan pada kelompok usia 13-24 bulan. Hal ini menunjukkan bahwa intervensi gizi dan pemantauan pertumbuhan perlu dilakukan sedini mungkin, terutama sebelum anak memasuki usia 12 bulan.
 
-2. Tidak ada perbedaan yang signifikan antara laki-laki dan perempuan dalam hal jumlah kasus stunting
+2. Berdasarkan hasil analisis, tidak ditemukan perbedaan yang signifikan antara balita laki-laki dan perempuan dalam jumlah kasus stunting. Kondisi ini menunjukkan bahwa stunting dapat terjadi pada kedua jenis kelamin dengan tingkat yang relatif sama. Karena tubuh manusia ternyata cukup adil saat membagikan masalah kesehatan. Tragis, tapi konsisten.
 
-3. Balita yang stunting punya tinggi badan dan berat badan yang jauh lebih rendah dibanding yang normal, dan ini bisa keliatan dari nilai HAZ z-score yang negatif
+3. Balita yang mengalami stunting memiliki tinggi badan dan berat badan yang lebih rendah dibandingkan balita dengan pertumbuhan normal. Kondisi tersebut juga terlihat dari nilai HAZ z-score yang cenderung negatif, yang menandakan adanya gangguan pertumbuhan pada balita.
 
-4. Growth Composite Index (GCI) bisa jadi indikator yang bagus karena ngegabungin 3 z-score sekaligus (HAZ, WAZ, BAZ) jadi bisa kasih gambaran yang lebih lengkap
+4. Growth Composite Index (GCI) dapat digunakan sebagai indikator yang baik dalam menilai kondisi pertumbuhan balita karena menggabungkan tiga z-score sekaligus, yaitu HAZ, WAZ, dan BAZ. Dengan demikian, GCI mampu memberikan gambaran kondisi pertumbuhan yang lebih menyeluruh.
 
-5. Pola pertumbuhan menunjukkan gap yang makin lebar seiring usia, artinya makin cepat ditangani makin baik hasilnya
+5. Selain itu, pola pertumbuhan menunjukkan bahwa perbedaan antara balita normal dan balita stunting semakin terlihat seiring bertambahnya usia. Hal ini menandakan bahwa penanganan yang dilakukan lebih awal akan memberikan hasil yang lebih baik dalam mencegah maupun mengurangi risiko stunting.
 """)
