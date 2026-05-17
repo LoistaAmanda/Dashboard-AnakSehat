@@ -203,7 +203,7 @@ with col1:
 with col2:
     sumbu_y = st.selectbox("pilih sumbu Y", ["tinggi_cm", "berat_kg", "umur_bulan", "haz_zscore", "waz_zscore", "bmi", "growth_composite_index"], index=1)
 
-jumlah_sampel = st.slider("jumlah data yang ditampilkan (biar ga lemot)", 500, 5000, 2000, 500)
+jumlah_sampel = st.slider("jumlah data yang ditampilkan", 500, 5000, 2000, 500)
 
 pisah_gender2 = st.checkbox("pisah warna per jenis kelamin juga?")
 
