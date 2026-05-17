@@ -65,7 +65,7 @@ st.divider()
 # PERTANYAAN 1
 # =============================================
 st.subheader("Pertanyaan 1 - Stunting berdasarkan Usia dan Jenis Kelamin")
-st.write("mau liat kelompok mana yang paling banyak kena stunting")
+st.write("Pada kelompok usia serta jenis kelamin manakah yang memiliki presentase stunting tertinggi ditemukan pada balita dalam rentang usia 0 sampai 24 bulan?")
 
 # pilihan chart
 tipe_chart = st.radio("mau liat chart apa?", ["Stacked Bar", "Grouped Bar"], horizontal=True)
@@ -105,10 +105,10 @@ st.divider()
 # PERTANYAAN 2
 # =============================================
 st.subheader("Pertanyaan 2 - Karakteristik Balita per Kategori Stunting")
-st.write("mau liat distribusi tinggi, berat, sama usia di tiap kategori stunting")
+st.write("Bagaimana distribusi dan karakteristik tinggi badan, berat badan, usia, serta jenis kelamin pada masing-masing kategori status stunting balita usia 0–24 bulan?")
 
 pilih_variabel = st.selectbox(
-    "pilih variabel yang mau dilihat",
+    "pilih variabel yang ingin dilihat",
     ["tinggi_cm", "berat_kg", "umur_bulan", "haz_zscore", "waz_zscore", "bmi", "growth_composite_index"]
 )
 
@@ -159,7 +159,7 @@ st.divider()
 # PERTANYAAN 3
 # =============================================
 st.subheader("Pertanyaan 3 - Jumlah Kasus Stunting")
-st.write("mau liat berapa banyak kasus stunting di tiap kelompok")
+st.write("Bagaimana distribusi jumlah kasus stunting pada setiap kelompok usia dan jenis kelamin balita usia 0–24 bulan dalam dataset AnakSehat AI?")
 
 tampilkan = st.radio("tampilkan berdasarkan", ["Kelompok Usia", "Jenis Kelamin"], horizontal=True)
 
@@ -195,7 +195,7 @@ st.divider()
 # PERTANYAAN 4
 # =============================================
 st.subheader("Pertanyaan 4 - Hubungan antar Variabel")
-st.write("mau liat hubungan antara 2 variabel dan pengaruhnya ke stunting")
+st.write("Bagaimana hubungan antara tinggi badan, berat badan, dan usia terhadap kategori status stunting balita berdasarkan hasil visualisasi data pada dataset AnakSehat AI?")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -207,7 +207,7 @@ jumlah_sampel = st.slider("jumlah data yang ditampilkan (biar ga lemot)", 500, 5
 
 pisah_gender2 = st.checkbox("pisah warna per jenis kelamin juga?")
 
-# ambil sampel biar ga berat
+# ambil sampel
 df_sampel = df_filter.sample(min(jumlah_sampel, len(df_filter)), random_state=42)
 
 fig4, ax4 = plt.subplots(figsize=(10, 6))
@@ -250,7 +250,7 @@ st.divider()
 # PERTANYAAN 5
 # =============================================
 st.subheader("Pertanyaan 5 - Pola Pertumbuhan")
-st.write("mau liat gimana pola tumbuh balita dari usia 0 sampai 24 bulan")
+st.write("Bagaimana perbedaan pola pertumbuhan tinggi badan dan berat badan antara balita normal, stunted, dan severely stunted usia 0–24 bulan berdasarkan dataset AnakSehat AI?")
 
 pilih_var5 = st.selectbox(
     "variabel yang mau dilihat polanya",
@@ -316,7 +316,7 @@ st.divider()
 # KESIMPULAN
 # =============================================
 st.subheader("Kesimpulan")
-st.write("ini rangkuman dari semua yang udah dianalisis")
+st.write("ini rangkuman dari semua yang telah dianalisis")
 
 total_data   = len(df_filter)
 jml_normal   = len(df_filter[df_filter['stunting'] == 'Normal'])
@@ -331,7 +331,7 @@ col_b.metric("Stunted",          f"{jml_stunted:,}")
 col_c.metric("Severely Stunted", f"{jml_severe:,}")
 col_d.metric("Tall",             f"{jml_tall:,}")
 
-st.write(f"total balita yang kena stunting (stunted + severely stunted): **{jml_stunted + jml_severe:,} balita ({pct_stunting:.1f}%)**")
+st.write(f"total balita yang terkena stunting (stunted + severely stunted): **{jml_stunted + jml_severe:,} balita ({pct_stunting:.1f}%)**")
 
 st.success("""
 **Kesimpulan dari analisis:**
