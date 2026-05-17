@@ -12,7 +12,7 @@ st.title("Dashboard AnakSehat AI")
 st.caption("Analisis Interaktif Stunting Balita Usia 0–24 Bulan")
 
 # load data
-df = pd.read_csv("data/data_final_AnakSehat.csv")
+df = pd.read_csv("dashboard/data/data_final_AnakSehat.csv")
 
 # menampilkan preview data
 st.subheader("Preview Dataset")
