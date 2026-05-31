@@ -28,7 +28,7 @@ dashboard_anaksehat/
 | **File** | `data_final_AnakSehat.csv` |
 | **Jumlah Baris Awal** | 100.000 baris |
 | **Jumlah Baris Bersih** | 92.692 baris (7.308 duplikat dihapus) |
-| **Jumlah Kolom** | 19 kolom |
+| **Jumlah Kolom** | 14 kolom |
 | **Rentang Usia** | 0 – 24 bulan |
 | **Standar Referensi** | WHO Child Growth Standards |
 
@@ -45,22 +45,19 @@ dashboard_anaksehat/
 | `jenis_kelamin_enc` | int | Encoding biner jenis kelamin |
 | `wasting_enc` | int | Encoding ordinal status wasting |
 | `stunting_enc` | int | Encoding ordinal status stunting |
-| `haz_zscore` | float | Height-for-Age Z-Score (WHO) |
 | `waz_zscore` | float | Weight-for-Age Z-Score (WHO) |
 | `baz_zscore` | float | BMI-for-Age Z-Score (WHO) |
 | `bmi` | float | Body Mass Index dalam kg/m² |
 | `kategori_bmi` | object | Kategori BMI balita berdasarkan threshold WHO |
 | `weight_height_ratio` | float | Rasio berat badan terhadap tinggi badan |
-| `growth_composite_index` | float | Indeks pertumbuhan komposit dengan skala 0–100 |
-| `kategori_gci` | object | Kategori GCI: Risiko Tinggi / Perlu Perhatian / Tumbuh Baik |
-| `stunting_dari_haz` | object | Klasifikasi ulang status stunting berdasarkan HAZ (untuk validasi) |
+
 
 
 > Penjelasan lengkap setiap kolom tersedia pada file `Data_Dictionary_AnakSehat.docx`.
 
 ---
 
-## 📓 Notebook (`notebook.ipynb`)
+## 📓 Notebook_Analisis_Data_AnakSehat_AI.ipynb 
 
 Notebook ini memuat seluruh alur analisis data secara sistematis, mulai dari pengumpulan data hingga pembuatan fitur baru.
 
@@ -69,18 +66,17 @@ Notebook ini memuat seluruh alur analisis data secara sistematis, mulai dari pen
 ```
 1. Import Library
 2. Data Wrangling
-   ├── Gathering Data        → memuat dataset dari Google Drive
+   ├── Gathering Data → memuat dataset AnakSehat AI
    ├── Assessing Data        → pemeriksaan missing value, duplikat, dan tipe data
    └── Cleaning Data         → penghapusan duplikat dan standarisasi nama kolom
 3. Exploratory Data Analysis (EDA)
    └── analisis distribusi stunting, usia, tinggi badan, berat badan, dan jenis kelamin
 4. Feature Engineering
    ├── Encoding kolom kategorikal
-   ├── HAZ Z-Score (Height-for-Age)
    ├── WAZ Z-Score (Weight-for-Age)
+   ├── BMI (Body Mass Index)
    ├── BAZ Z-Score (BMI-for-Age)
-   ├── BMI dan Weight-Height Ratio
-   └── Growth Composite Index (GCI)
+   └── Weight-to-Height Ratio (WHR)
 5. Data Dictionary
 6. Visualization & Explanatory Analysis
    ├── Pertanyaan 1 → persentase stunting per kelompok usia dan jenis kelamin
@@ -177,7 +173,14 @@ Berikut adalah 5 pertanyaan bisnis yang dijawab dalam notebook dan dashboard:
 
 ---
 
+## 📈 Insight Utama
+
+- Distribusi kasus stunting berbeda pada setiap kelompok usia dan jenis kelamin.
+- Tinggi badan dan berat badan menunjukkan hubungan yang jelas terhadap status stunting.
+- Balita kategori Severely Stunted memiliki pola pertumbuhan yang berbeda dibandingkan kategori Normal.
+- Feature engineering menggunakan indikator WAZ, BMI, dan BAZ membantu memberikan gambaran kondisi pertumbuhan balita secara lebih komprehensif.
+
 ## 📌 Catatan
 
-- Seluruh nilai z-score dihitung menggunakan tabel referensi **WHO Child Growth Standards** dengan median dan standar deviasi per kelompok usia dan jenis kelamin.
+- Nilai WAZ (Weight-for-Age Z-Score) dan BAZ (BMI-for-Age Z-Score) dihitung menggunakan referensi WHO Child Growth Standards berdasarkan usia dan jenis kelamin balita.
 - Dashboard dikembangkan menggunakan **Streamlit** dengan visualisasi berbasis **Matplotlib** dan **Seaborn**.
