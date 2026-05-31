@@ -109,7 +109,7 @@ st.write("Bagaimana distribusi dan karakteristik tinggi badan, berat badan, usia
 
 pilih_variabel = st.selectbox(
     "Pilih variabel yang ingin dilihat",
-    ["tinggi_cm", "berat_kg", "umur_bulan", "haz_zscore", "waz_zscore", "bmi", "growth_composite_index"]
+    ["tinggi_cm", "berat_kg", "umur_bulan", "waz_zscore", "bmi"]
 )
 
 pilih_chart2 = st.radio("Pilih tipe chart", ["Box Plot", "Violin Plot", "Histogram"], horizontal=True)
@@ -148,7 +148,14 @@ st.pyplot(fig2)
 
 # tabel rata-rata
 st.write("Rata-rata per kategori:")
-rata2 = df_filter.groupby('stunting')[['tinggi_cm', 'berat_kg', 'umur_bulan', 'haz_zscore', 'growth_composite_index']].mean().round(2)
+rata2 = df_filter.groupby('stunting')[[
+    'tinggi_cm',
+    'berat_kg',
+    'umur_bulan',
+    'waz_zscore',
+    'bmi',
+    'baz_zscore'
+]].mean().round(2)
 st.dataframe(rata2)
 
 st.info("Insight: Balita dengan kategori severely stunted memiliki rata-rata tinggi badan paling rendah dibandingkan dengan kategori lainny dan terlihat jauh berada di bawah balita dengan pertumbuhan normal. Kondisi ini menunjukkan adanya gangguan pertumbuhan yang cukup serius pada balita tersebut.")
@@ -199,9 +206,25 @@ st.write("Bagaimana hubungan antara tinggi badan, berat badan, dan usia terhadap
 
 col1, col2 = st.columns(2)
 with col1:
-    sumbu_x = st.selectbox("pilih sumbu X", ["tinggi_cm", "berat_kg", "umur_bulan", "haz_zscore", "waz_zscore", "bmi", "growth_composite_index"], index=0)
+    sumbu_x = st.selectbox("pilih sumbu X",[
+    "tinggi_cm",
+    "berat_kg",
+    "umur_bulan",
+    "waz_zscore",
+    "bmi",
+    "baz_zscore",
+    "weight_height_ratio"
+], index=0)
 with col2:
-    sumbu_y = st.selectbox("pilih sumbu Y", ["tinggi_cm", "berat_kg", "umur_bulan", "haz_zscore", "waz_zscore", "bmi", "growth_composite_index"], index=1)
+    sumbu_y = st.selectbox("pilih sumbu Y",[
+    "tinggi_cm",
+    "berat_kg",
+    "umur_bulan",
+    "waz_zscore",
+    "bmi",
+    "baz_zscore",
+    "weight_height_ratio"
+], index=1)
 
 jumlah_sampel = st.slider("jumlah data yang ditampilkan", 500, 5000, 2000, 500)
 
@@ -254,7 +277,14 @@ st.write("Bagaimana perbedaan pola pertumbuhan tinggi badan dan berat badan anta
 
 pilih_var5 = st.selectbox(
     "Variabel yang ingin dilihat polanya",
-    ["tinggi_cm", "berat_kg", "haz_zscore", "waz_zscore", "growth_composite_index"]
+    [
+    "tinggi_cm",
+    "berat_kg",
+    "waz_zscore",
+    "bmi",
+    "baz_zscore",
+    "weight_height_ratio"
+]
 )
 
 pilih_status5 = st.multiselect(
@@ -340,9 +370,7 @@ st.success("""
 
 2. Berdasarkan hasil analisis, tidak ditemukan perbedaan yang signifikan antara balita laki-laki dan perempuan dalam jumlah kasus stunting. Kondisi ini menunjukkan bahwa stunting dapat terjadi pada kedua jenis kelamin dengan tingkat yang relatif sama. Karena tubuh manusia ternyata cukup adil saat membagikan masalah kesehatan. Tragis, tapi konsisten.
 
-3. Balita yang mengalami stunting memiliki tinggi badan dan berat badan yang lebih rendah dibandingkan balita dengan pertumbuhan normal. Kondisi tersebut juga terlihat dari nilai HAZ z-score yang cenderung negatif, yang menandakan adanya gangguan pertumbuhan pada balita.
+3. Balita yang mengalami stunting memiliki tinggi badan dan berat badan yang lebih rendah dibandingkan balita dengan pertumbuhan normal. Kondisi tersebut juga tercermin pada nilai WAZ dan BAZ yang menunjukkan perbedaan kondisi pertumbuhan antar kategori stunting.
 
-4. Growth Composite Index (GCI) dapat digunakan sebagai indikator yang baik dalam menilai kondisi pertumbuhan balita karena menggabungkan tiga z-score sekaligus, yaitu HAZ, WAZ, dan BAZ. Dengan demikian, GCI mampu memberikan gambaran kondisi pertumbuhan yang lebih menyeluruh.
-
-5. Selain itu, pola pertumbuhan menunjukkan bahwa perbedaan antara balita normal dan balita stunting semakin terlihat seiring bertambahnya usia. Hal ini menandakan bahwa penanganan yang dilakukan lebih awal akan memberikan hasil yang lebih baik dalam mencegah maupun mengurangi risiko stunting.
+4. Selain itu, pola pertumbuhan menunjukkan bahwa perbedaan antara balita normal dan balita stunting semakin terlihat seiring bertambahnya usia. Hal ini menandakan bahwa penanganan yang dilakukan lebih awal akan memberikan hasil yang lebih baik dalam mencegah maupun mengurangi risiko stunting.
 """)
